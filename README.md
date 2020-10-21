@@ -52,6 +52,13 @@ React-Native, GPS, Flask, Pandas, BigQuery, Leaflet
 * ソースコード：[flaskserver.py](flaskserver.py)  
 * GPSデータをBigQueryに保管する  
 
-## Leaflet
+## Leaflet:地図ライブラリ
 * ソースコード：[map.html](map.html)  
 * 地図にGPSデータを表示する  
+
+## 参考
+* Leaflet Quick Start Guide  
+ [https://leafletjs.com/examples/quick-start/](https://leafletjs.com/examples/quick-start/)  
+
+* Flask Quickstart  
+ [https://flask.palletsprojects.com/en/1.1.x/quickstart/#quickstart](https://flask.palletsprojects.com/en/1.1.x/quickstart/#quickstart)  

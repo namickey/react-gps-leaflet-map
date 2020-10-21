@@ -1,0 +1,39 @@
+<html>
+<head>
+  <meta charset=utf-8 />
+  <title>Esri Leaflet Quickstart</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.4.0/dist/leaflet.css"/>
+    <script src="https://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+    <script src="https://unpkg.com/esri-leaflet@2.2.3/dist/esri-leaflet.js"></script>
+  <style>
+    body { margin:0; padding:0; }
+    #map { position: absolute; top:0; bottom:0; right:0; left:0; }
+  </style>
+</head>
+<body>
+<div id="map"></div>
+<script>
+  var map = L.map("map").setView([35.7, 139.8], 11);
+  //Topographic, Streets, ImageryFirefly
+  L.esri.basemapLayer("Streets").addTo(map);
+  fetch("https://xxxxxxx/xxxxxxxx")//IBM Cloudにデプロイしたアプリを指定する
+  .then(function(response){
+    return response.json();
+  })
+  .then(function(json){
+    const obj = JSON.parse(json);
+    const longitudeList = Object.entries(obj.longitude);
+    const dtList = Object.entries(obj.dt);
+    const lineArray = [];
+    Object.entries(obj.latitude).forEach((item, index) => {
+      L.marker([item[1], longitudeList[index][1]]).addTo(map);
+      lineArray.push([item[1],longitudeList[index][1],dtList[index][1]]);
+    })
+    lineArray.sort(function(a,b) {
+      return (a[2] < b[2] ? 1 : -1);
+    });
+    L.polyline(lineArray, { color: 'blue', weight: 5 }).addTo(map);
+  });
+</script>
+</body>
